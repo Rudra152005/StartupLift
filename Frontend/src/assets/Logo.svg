@@ -1,0 +1,13 @@
+<svg width="210" height="48" viewBox="0 0 210 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle and Arrow -->
+  <circle cx="24" cy="24" r="12" stroke="white" stroke-width="2"></circle>
+  <path d="M24 15L29 24H19L24 15Z" fill="#7C3AED"></path>
+
+  <!-- Text -->
+  <text x="48" y="29" fill="white" font-family="Inter, Poppins, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="0.5">
+    Startup
+  </text>
+  <text x="115" y="29" fill="#7C3AED" font-family="Inter, Poppins, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="0.5">
+    Lift
+  </text>
+</svg>
