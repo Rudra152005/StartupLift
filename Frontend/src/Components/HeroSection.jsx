@@ -1,9 +1,9 @@
 import React from "react";
-import growImg from "../assets/growth-chart.png"; // ✅ Make sure path is correct
+import growImg from "../assets/growth-chart.png"; 
 
 function HeroSection() {
   return (
-    <section className="relative bg-[#0B0B14] text-white overflow-hidden">
+    <section className="relative bg-[#0B0B14] text-white overflow-hidden my-15">
       {/* === Background Gradient === */}
       <div className="absolute inset-0 bg-linear-to-br from-[#0F0F1F] via-[#0B0B14] to-[#141425]"></div>
 
