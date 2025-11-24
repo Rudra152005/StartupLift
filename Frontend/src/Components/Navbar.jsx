@@ -21,11 +21,11 @@ function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0B0B0F]/70 backdrop-blur-xl shadow-[0_0_25px_rgba(124,58,237,0.25)]" // 🔥 reduced opacity when scrolled
+          ? "bg-[#0B0B0F]/70 backdrop-blur-xl shadow-[0_0_25px_rgba(124,58,237,0.25)]"
           : "bg-[#0B0B0F]/95 backdrop-blur-lg"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 md:px-12">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 md:px-12 font-inter">
         {/* ✅ Logo Section */}
         <div className="flex items-center space-x-3">
           <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-linear-to-br from-[#7C3AED] to-[#9333EA] p-0.5 shadow-[0_0_25px_rgba(124,58,237,0.5)]">
@@ -37,7 +37,9 @@ function Navbar() {
               />
             </div>
           </div>
-          <h1 className="text-[20px] md:text-[22px] font-semibold text-gray-200 tracking-wide">
+
+          {/* ⭐ LOGO TEXT NOW USES font-grotesk */}
+          <h1 className="font-grotesk text-[20px] md:text-[22px] font-semibold text-gray-200 tracking-wide">
             Startup
             <span className="bg-linear-to-r from-[#7C3AED] to-[#9333EA] bg-clip-text text-transparent">
               Lift
@@ -45,8 +47,8 @@ function Navbar() {
           </h1>
         </div>
 
-        {/* ✅ Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-10 text-gray-300 text-[15px] font-medium">
+        {/* ⭐ Desktop Nav Links (font-inter applied) */}
+        <ul className="hidden md:flex items-center gap-10 text-gray-300 text-[15px] font-inter font-medium">
           {navLinks.map((link) => (
             <li
               key={link}
@@ -58,25 +60,25 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* ✅ Apply Button */}
-        <button className="hidden md:block bg-linear-to-r from-[#7C3AED] to-[#9333EA] text-white px-6 py-2 rounded-full text-sm font-semibold hover:scale-105 hover:shadow-[0_0_15px_#7C3AED] transition-all duration-300">
+        {/* ⭐ Apply Button (font-inter applied) */}
+        <button className="hidden md:block font-inter bg-linear-to-r from-[#7C3AED] to-[#9333EA] text-white px-6 py-2 rounded-full text-sm font-semibold hover:scale-105 hover:shadow-[0_0_15px_#7C3AED] transition-all duration-300">
           Apply Now
         </button>
 
-        {/* ✅ Mobile Menu Toggle */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={toggleMenu}
-          className="md:hidden text-gray-300 hover:text-white transition"
+          className="md:hidden text-gray-300 hover:text-white transition font-inter"
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* ✅ Mobile Dropdown */}
+      {/* Mobile Dropdown */}
       {isOpen && (
         <div className="md:hidden bg-[#0A0A0A]/95 backdrop-blur-md border-t border-gray-800">
-          <ul className="flex flex-col items-center py-8 space-y-6 text-gray-300 text-lg font-medium">
+          <ul className="flex flex-col items-center py-8 space-y-6 text-gray-300 text-lg font-inter font-medium">
             {navLinks.map((link) => (
               <li
                 key={link}
@@ -85,7 +87,7 @@ function Navbar() {
                 {link}
               </li>
             ))}
-            <button className="bg-linear-to-r from-[#7C3AED] to-[#9333EA] text-white px-8 py-2.5 rounded-full font-semibold hover:scale-105 hover:shadow-[0_0_15px_#7C3AED] transition-transform duration-300">
+            <button className="bg-linear-to-r from-[#7C3AED] to-[#9333EA] text-white px-8 py-2.5 rounded-full font-semibold font-inter hover:scale-105 hover:shadow-[0_0_15px_#7C3AED] transition-transform duration-300">
               Apply Now
             </button>
           </ul>

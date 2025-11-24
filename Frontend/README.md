@@ -1,16 +1,63 @@
-# React + Vite
+📌 Features
+🧑‍💼 For Startups
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Submit startup ideas with details like problem statement, solution, market size, and business model
 
-Currently, two official plugins are available:
+Upload pitch decks or supporting documents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Track pitch review status
 
-## React Compiler
+Receive feedback and funding suggestions from mentors
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🎓 For Mentors
 
-## Expanding the ESLint configuration
+Review startup submissions
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Comment, score, or suggest funding
+
+Approve/reject pitches
+
+Dashboard to manage all assigned pitches
+
+🔐 Authentication & User Roles
+
+Secure login/signup using JWT
+
+Two user roles:
+
+Startup Founder
+
+Mentor
+
+Role-based access control (RBAC)
+
+📊 Dashboard & UI
+
+Modern, responsive UI built with Tailwind CSS
+
+Interactive dashboards for both founders and mentors
+
+Real-time updates using API integration
+
+🛠️ Tech Stack
+Frontend
+
+React.js (Vite or CRA)
+
+Tailwind CSS
+
+Axios for API calls
+
+Backend
+
+Node.js
+
+Express.js
+
+JWT Authentication
+
+Multer (for file uploads)
+
+Database
+
+MongoDB + Mongoose ORM
