@@ -1,0 +1,453 @@
+@import "tailwindcss";
+
+/* Ensure Toastify is always on top */
+.Toastify__toast-container {
+  z-index: 99999999 !important;
+}
+
+/* === Theme Variables === */
+:root {
+  /* LIGHT MODE (Default) */
+  --bg-primary: #FDFBD4;
+  /* Cream */
+  --text-primary: #2D1B0A;
+  /* Darker Brown for better contrast */
+  --text-secondary: #5A3D1E;
+  /* Medium Brown for secondary text */
+  --color-primary: #C05800;
+  /* Orange */
+  --color-secondary: #713600;
+  /* Brown */
+  --color-accent: #C05800;
+  /* Orange (reused for consistency) */
+
+  /* Cinematic Night Forest Theme Tokens (Light Mode Base) */
+  --night-bg: #FDFBD4;
+  --night-forest-deep: radial-gradient(circle at top right, #fffbeb, #FDFBD4);
+  --cyan-glow: 0 0 20px rgba(192, 88, 0, 0.2);
+  --amber-glow: 0 0 20px rgba(113, 54, 0, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(90, 61, 30, 0.1);
+  --glass-inner-glow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+
+  /* Footer & Navbar specific colors for light mode */
+  --footer-bg: #5A3D1E;
+  /* Brown background for footer */
+  --footer-text: #FDFBD4;
+  /* Cream text on brown footer */
+  --navbar-bg: rgba(90, 61, 30, 0.7);
+  /* Transparent brown for navbar */
+  --navbar-text: #FDFBD4;
+  /* Cream text on brown navbar */
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+/* DARK MODE OVERRIDES */
+.dark {
+  --bg-primary: #050505;
+  --text-primary: #f8fafc;
+  /* Slightly brighter for better contrast on true black */
+  --text-secondary: #94a3b8;
+  --color-primary: #10b981;
+  /* Emerald 500 */
+  --color-secondary: #059669;
+  /* Emerald 600 */
+  --color-accent: #34d399;
+  /* Emerald 400 */
+
+  /* Footer & Navbar colors for dark mode */
+  --footer-bg: #030712;
+  --footer-text: #f8fafc;
+  --navbar-bg: rgba(3, 7, 18, 0.7);
+
+  /* Cinematic Overrides for Dark Mode */
+  --night-bg: #030712;
+  --night-forest-deep: radial-gradient(circle at top right, #08122a, #030712);
+  --cyan-glow: 0 0 15px rgba(16, 185, 129, 0.3);
+  /* Subtler glow */
+  --amber-glow: 0 0 15px rgba(245, 158, 11, 0.3);
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  /* Slate-tented glass */
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-inner-glow: inset 0 0 15px rgba(255, 255, 255, 0.01);
+}
+
+/* === Base Styling === */
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  /* Consolidate scrolling to the root */
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  width: 100%;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Prevent all elements from causing horizontal overflow */
+* {
+  box-sizing: border-box;
+}
+
+section {
+  scroll-margin-top: 6rem;
+  overflow-x: hidden;
+  /* Performance Hints */
+  will-change: transform, opacity;
+  contain: content;
+}
+
+/* === Responsive Typography === */
+h1 {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+p {
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+}
+
+/* === Responsive Container Utilities === */
+.container-responsive {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* === Headings & Paragraphs === */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+p {
+  color: #a1a1aa;
+  line-height: 1.75;
+}
+
+/* === Gradient Utilities === */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, var(--color-accent) 50%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+
+.shadow-glow {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.25);
+}
+
+/* === Scrollbar Customization === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(192, 88, 0, 0.3);
+  /* Themed primary color */
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  /* Themed emerald green */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.font-grotesk {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* === 3D Transform Utilities === */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* === 3D Animation Keyframes === */
+@keyframes float-3d {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+
+  25% {
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotateX(0deg) rotateY(0deg);
+  }
+
+  75% {
+    transform: translateY(-10px) rotateX(-2deg) rotateY(2deg);
+  }
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+
+  25% {
+    transform: translateX(-25%) translateY(-5px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  75% {
+    transform: translateX(-75%) translateY(-5px);
+  }
+}
+
+@keyframes particle-float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translate(20px, -30px) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+  }
+}
+
+/* Light mode pulse glow */
+:root {
+  --pulse-glow-light: 0 0 20px rgba(192, 88, 0, 0.3);
+  --pulse-glow-light-active: 0 0 40px rgba(192, 88, 0, 0.6);
+}
+
+.dark {
+  --pulse-glow-light: 0 0 20px rgba(16, 185, 129, 0.3);
+  --pulse-glow-light-active: 0 0 40px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes pulse-glow-theme {
+
+  0%,
+  100% {
+    box-shadow: var(--pulse-glow-light);
+  }
+
+  50% {
+    box-shadow: var(--pulse-glow-light-active);
+  }
+}
+
+/* === Enhanced Gradient Utilities === */
+.gradient-animated {
+  background: linear-gradient(135deg,
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-accent));
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* === Utility Classes === */
+.float-3d {
+  animation: float-3d 6s ease-in-out infinite;
+}
+
+.wave-animation {
+  animation: wave 20s linear infinite;
+}
+
+@keyframes float-cinematic {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  33% {
+    transform: translateY(-10px) translateX(10px);
+  }
+
+  66% {
+    transform: translateY(5px) translateX(-5px);
+  }
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer-slow {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.cinematic-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-inner-glow);
+}
+
+.text-glow-emerald {
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+}
+
+.text-glow-amber {
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+}
+
+.particle-animation {
+  animation: particle-float 8s ease-in-out infinite;
+}
