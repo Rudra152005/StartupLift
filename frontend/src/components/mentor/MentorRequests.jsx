@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Building2, ExternalLink, Zap, Video, Eye, FileText } from 'lucide-react';
-import axios from 'axios';
+import axios from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 
 const MentorRequests = () => {
@@ -25,7 +25,7 @@ const MentorRequests = () => {
     try {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/mentors/my-requests`, config);
+      const response = await axios.get("/mentors/my-requests");
 
       if (response.data.success) {
         // Filter to show only Mentorship requests
@@ -63,7 +63,7 @@ const MentorRequests = () => {
 
       const status = type === 'accept' ? 'accepted' : 'rejected';
 
-      const response = await axios.put(`${import.meta.env.VITE_API_URL}/mentors/requests/${requestId}`, { status }, config);
+      const response = await axios.put(`/mentors/requests/${requestId}`, { status });
 
       if (response.data.success) {
         toast.success(`Request ${status} successfully!`);

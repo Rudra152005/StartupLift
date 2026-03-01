@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
 import axiosInstance from '../api/axiosInstance';
 
 const AuthContext = createContext();
@@ -92,25 +91,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginWithGoogle = () => {
-    const backendUrl = import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:5000";
+    let backendUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    backendUrl = backendUrl.replace("/api", "");
+    if (backendUrl.endsWith('/')) backendUrl = backendUrl.slice(0, -1);
+
     window.location.href = `${backendUrl}/api/auth/google`;
   };
 
   const logout = async () => {
     try {
       const backendUrl = import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:5000";
-      await axios.post(
-        `${backendUrl}/api/auth/logout`,
-        {},
-        { withCredentials: true }
+      await axiosInstance.post(
+        `/auth/logout`,
+        {}
       );
     } catch (error) {
       console.log('Logout endpoint error (might be expected)');
     } finally {
       setUser(null);
       sessionStorage.removeItem('token');
-      sessionStorage.removeItem('user'); // Also remove user from sessionStorage
-      delete axios.defaults.headers.common['Authorization']; // Remove axios header
+      sessionStorage.removeItem('user');
+      delete axiosInstance.defaults.headers.common['Authorization'];
       window.location.href = '/login';
     }
   };

@@ -639,7 +639,7 @@ const Avatar = ({ src, alt, className = "", fontSize = "text-xl" }) => {
 
   // Normalize URL
   const backendBase = import.meta.env.VITE_API_URL?.replace('/api', '') || "http://localhost:5000";
-  imageUrl = `${backendBase}/${src.startsWith('/') ? src.slice(1) : src}`;
+  const imageUrl = `${backendBase}/${src.startsWith('/') ? src.slice(1) : src}`;
 
   if (!src || error) {
     return (

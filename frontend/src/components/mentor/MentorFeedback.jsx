@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Send, Star } from "lucide-react";
-import axios from "axios";
+import axios from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 
 const MentorFeedback = () => {
@@ -26,7 +26,7 @@ const MentorFeedback = () => {
     try {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/mentors/my-requests?status=accepted`, config);
+      const res = await axios.get("/mentors/my-requests?status=accepted");
       if (res.data.success) {
         // Filter unique accepted founders
         const accepted = res.data.data
@@ -47,7 +47,7 @@ const MentorFeedback = () => {
     try {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/feedback/given`, config);
+      const res = await axios.get("/feedback/given");
       if (res.data.success) {
         setHistory(res.data.data);
       }
@@ -64,7 +64,7 @@ const MentorFeedback = () => {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/feedback`, formData, config);
+      const res = await axios.post("/feedback", formData);
 
       if (res.data.success) {
         toast.success("Feedback submitted successfully!");

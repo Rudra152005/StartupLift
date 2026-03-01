@@ -25,7 +25,7 @@ const MentorFundingRequests = () => {
         try {
             const token = sessionStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/mentors/my-requests`, config);
+            const response = await axios.get("/mentors/my-requests");
 
             if (response.data.success) {
                 // Filter to show only Funding requests
@@ -62,7 +62,7 @@ const MentorFundingRequests = () => {
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
             const status = type === 'accept' ? 'accepted' : 'rejected';
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/mentors/requests/${requestId}`, { status }, config);
+            const response = await axios.put(`/mentors/requests/${requestId}`, { status });
 
             if (response.data.success) {
                 toast.success(`Funding request ${status} successfully!`);

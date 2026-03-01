@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, DollarSign, Loader } from 'lucide-react';
-import axios from 'axios';
+import axios from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
 
@@ -24,10 +24,10 @@ const PaymentModal = ({ isOpen, onClose, recipient, onSuccess }) => {
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
             // 1. Create Order
-            const { data: orderData } = await axios.post(`${import.meta.env.VITE_API_URL}/payment/create-order`, {
+            const { data: orderData } = await axios.post("/payment/create-order", {
                 amount: amount,
                 founderId: recipient.userId // Assuming recipient object has userId of the startup founder
-            }, config);
+            });
 
             if (!orderData.success) throw new Error("Order creation failed");
 
@@ -43,11 +43,11 @@ const PaymentModal = ({ isOpen, onClose, recipient, onSuccess }) => {
                     console.log("Razorpay handler triggered", response);
                     try {
                         // 3. Verify Payment
-                        const verifyRes = await axios.post(`${import.meta.env.VITE_API_URL}/payment/verify-payment`, {
+                        const verifyRes = await axios.post("/payment/verify-payment", {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature
-                        }, config);
+                        });
 
                         console.log("Verification Response:", verifyRes.data);
 
