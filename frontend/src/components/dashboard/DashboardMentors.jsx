@@ -638,13 +638,8 @@ const Avatar = ({ src, alt, className = "", fontSize = "text-xl" }) => {
   const [error, setError] = useState(false);
 
   // Normalize URL
-  let imageUrl = src;
-  if (src && !src.startsWith("http") && !src.startsWith("data:")) {
-    // Attempt to prepend backend URL if it looks like a relative path
-    // Remove leading slash if present to avoid double slash if needed, or backend handles it.
-    // Assuming uploads are served from root
-    imageUrl = `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}/${src.startsWith('/') ? src.slice(1) : src}`;
-  }
+  const backendBase = import.meta.env.VITE_API_URL?.replace('/api', '') || "http://localhost:5000";
+  imageUrl = `${backendBase}/${src.startsWith('/') ? src.slice(1) : src}`;
 
   if (!src || error) {
     return (

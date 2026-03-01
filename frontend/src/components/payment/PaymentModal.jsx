@@ -24,7 +24,7 @@ const PaymentModal = ({ isOpen, onClose, recipient, onSuccess }) => {
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
             // 1. Create Order
-            const { data: orderData } = await axios.post("http://localhost:5000/api/payment/create-order", {
+            const { data: orderData } = await axios.post(`${import.meta.env.VITE_API_URL}/payment/create-order`, {
                 amount: amount,
                 founderId: recipient.userId // Assuming recipient object has userId of the startup founder
             }, config);
@@ -43,7 +43,7 @@ const PaymentModal = ({ isOpen, onClose, recipient, onSuccess }) => {
                     console.log("Razorpay handler triggered", response);
                     try {
                         // 3. Verify Payment
-                        const verifyRes = await axios.post("http://localhost:5000/api/payment/verify-payment", {
+                        const verifyRes = await axios.post(`${import.meta.env.VITE_API_URL}/payment/verify-payment`, {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature

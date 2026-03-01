@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, Upload, FileText, Video as VideoIcon, Check, Loader2, ScanLine, Plus, Trash2, Users } from 'lucide-react';
-import axios from 'axios';
+import axios from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 import Tesseract from 'tesseract.js';
 
@@ -49,8 +49,8 @@ const RequestFormModal = ({ isOpen, onClose, mentor, onSubmitSuccess }) => {
 
         try {
             const token = sessionStorage.getItem('token');
-            const response = await axios.post('http://localhost:5000/api/upload', data, {
-                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
+            const response = await axios.post('/upload', data, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
 
             if (response.data.success) {
@@ -244,7 +244,7 @@ const RequestFormModal = ({ isOpen, onClose, mentor, onSubmitSuccess }) => {
             const config = { headers: { Authorization: `Bearer ${token}` } };
             const payload = { mentorId: mentor._id, ...formData };
 
-            const response = await axios.post('http://localhost:5000/api/mentors/request', payload, config);
+            const response = await axios.post('/mentors/request', payload, config);
 
             if (response.data.success) {
                 toast.success("Request sent successfully!");

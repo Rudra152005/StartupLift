@@ -92,13 +92,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/auth/google`;
+    const backendUrl = import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:5000";
+    window.location.href = `${backendUrl}/api/auth/google`;
   };
 
   const logout = async () => {
     try {
+      const backendUrl = import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:5000";
       await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/auth/logout`,
+        `${backendUrl}/api/auth/logout`,
         {},
         { withCredentials: true }
       );

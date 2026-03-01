@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Save, Camera, User, Mail, Phone, FileText, CheckCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import axios from 'axios';
+import axios from '../../api/axiosInstance';
 
 const AdminProfile = () => {
     const { user, setUserData } = useAuth();
@@ -38,15 +38,7 @@ const AdminProfile = () => {
         setMessage("");
         try {
             const token = sessionStorage.getItem('token');
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-
-            const response = await axios.put(
-                `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/auth/profile`,
-                formData,
-                config
-            );
+            const response = await axios.put('/auth/profile', formData, config);
 
             if (response.data.success) {
                 setMessage("✅ Profile updated successfully!");
@@ -95,27 +87,18 @@ const AdminProfile = () => {
             const uploadData = new FormData();
             uploadData.append('file', file);
 
-            const uploadRes = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/upload`,
-                uploadData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data'
-                    }
+            const uploadRes = await axios.post('/upload', uploadData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
-            );
+            });
 
             if (uploadRes.data.success) {
                 const newAvatar = uploadRes.data.url;
                 setFormData(prev => ({ ...prev, avatar: newAvatar }));
 
                 // Also update immediately via API
-                await axios.put(
-                    `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/auth/profile`,
-                    { avatar: newAvatar },
-                    { headers: { Authorization: `Bearer ${token}` } }
-                );
+                await axios.put('/auth/profile', { avatar: newAvatar });
 
                 if (setUserData) {
                     setUserData({ ...user, avatar: newAvatar });

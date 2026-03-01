@@ -26,7 +26,7 @@ const MentorFeedback = () => {
     try {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const res = await axios.get("http://localhost:5000/api/mentors/my-requests?status=accepted", config);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/mentors/my-requests?status=accepted`, config);
       if (res.data.success) {
         // Filter unique accepted founders
         const accepted = res.data.data
@@ -47,7 +47,7 @@ const MentorFeedback = () => {
     try {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const res = await axios.get("http://localhost:5000/api/feedback/given", config);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/feedback/given`, config);
       if (res.data.success) {
         setHistory(res.data.data);
       }
@@ -64,7 +64,7 @@ const MentorFeedback = () => {
       const token = sessionStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const res = await axios.post("http://localhost:5000/api/feedback", formData, config);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/feedback`, formData, config);
 
       if (res.data.success) {
         toast.success("Feedback submitted successfully!");
